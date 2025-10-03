@@ -1,0 +1,305 @@
+@page "/appointments"
+@inject IAppointmentService AppointmentService
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+<PageTitle>Мои записи</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudText Typo="Typo.h4" Class="mb-6">Мои записи</MudText>
+    
+    @if (isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Class="mb-4" />
+        <MudSkeleton Animation="Animation.Wave" Height="100px" Class="mb-2" />
+        <MudSkeleton Animation="Animation.Wave" Height="100px" Class="mb-2" />
+        <MudSkeleton Animation="Animation.Wave" Height="100px" />
+    }
+    else if (appointments.Any())
+    {
+        <!-- Filters -->
+        <MudPaper Class="pa-4 mb-6" Elevation="1">
+            <MudGrid>
+                <MudItem xs="12" md="3">
+                    <MudSelect T="string" @bind-Value="selectedStatus" 
+                              Label="Статус" 
+                              Variant="Variant.Outlined"
+                              Clearable="true">
+                        <MudSelectItem Value="@("Requested")">Ожидает подтверждения</MudSelectItem>
+                        <MudSelectItem Value="@("Confirmed")">Подтверждена</MudSelectItem>
+                        <MudSelectItem Value="@("InProgress")">В процессе</MudSelectItem>
+                        <MudSelectItem Value="@("Completed")">Завершена</MudSelectItem>
+                        <MudSelectItem Value="@("Cancelled")">Отменена</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+                
+                <MudItem xs="12" md="3">
+                    <MudDatePicker @bind-Date="fromDate" 
+                                  Label="С даты" 
+                                  Variant="Variant.Outlined" />
+                </MudItem>
+                
+                <MudItem xs="12" md="3">
+                    <MudDatePicker @bind-Date="toDate" 
+                                  Label="По дату" 
+                                  Variant="Variant.Outlined" />
+                </MudItem>
+                
+                <MudItem xs="12" md="3">
+                    <MudButton Variant="Variant.Filled" 
+                              Color="Color.Primary" 
+                              OnClick="FilterAppointments"
+                              FullWidth="true"
+                              Class="mt-1">
+                        Применить фильтры
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <!-- Appointments List -->
+        <MudGrid>
+            @foreach (var appointment in filteredAppointments)
+            {
+                <MudItem xs="12">
+                    <MudCard Elevation="2" Class="mb-4">
+                        <MudCardContent>
+                            <MudGrid AlignItems="AlignItems.Center">
+                                <MudItem xs="12" md="2">
+                                    <MudText Typo="Typo.h6" Class="mb-1">
+                                        @appointment.StartTime.ToString("dd.MM.yyyy")
+                                    </MudText>
+                                    <MudText Typo="Typo.subtitle1" Color="Color.Primary">
+                                        @appointment.StartTime.ToString("HH:mm") - @appointment.EndTime.ToString("HH:mm")
+                                    </MudText>
+                                </MudItem>
+                                
+                                <MudItem xs="12" md="3">
+                                    <MudText Typo="Typo.h6" Class="mb-1">@appointment.DoctorName</MudText>
+                                    <MudText Typo="Typo.body2">@appointment.ServiceTitle</MudText>
+                                    @if (appointment.Clinic != null)
+                                    {
+                                        <MudText Typo="Typo.caption">
+                                            <MudIcon Icon="Icons.Material.Filled.LocationOn" Size="Size.Small" />
+                                            @appointment.Clinic.Name
+                                        </MudText>
+                                    }
+                                </MudItem>
+                                
+                                <MudItem xs="12" md="2">
+                                    <MudChip T="string" Color="@GetStatusColor(appointment.Status)" Size="Size.Small">
+                                        @GetStatusText(appointment.Status)
+                                    </MudChip>
+                                </MudItem>
+                                
+                                <MudItem xs="12" md="2">
+                                    <MudText Typo="Typo.h6" Color="Color.Primary">
+                                        @appointment.ServicePrice.ToString("N0") ₽
+                                    </MudText>
+                                </MudItem>
+                                
+                                <MudItem xs="12" md="3">
+                                    <MudStack Row="true" Spacing="2">
+                                        @if (appointment.Status == "Requested" || appointment.Status == "Confirmed")
+                                        {
+                                            @if (appointment.StartTime > DateTime.Now.AddHours(24))
+                                            {
+                                                <MudButton Variant="Variant.Outlined" 
+                                                          Color="Color.Warning" 
+                                                          Size="Size.Small"
+                                                          OnClick="@(() => CancelAppointment(appointment))">
+                                                    Отменить
+                                                </MudButton>
+                                            }
+                                            
+                                            <MudButton Variant="Variant.Text" 
+                                                      Color="Color.Primary" 
+                                                      Size="Size.Small"
+                                                      OnClick="@(() => ViewDetails(appointment))">
+                                                Подробнее
+                                            </MudButton>
+                                        }
+                                        
+                                        @if (appointment.Status == "Completed")
+                                        {
+                                            <MudButton Variant="Variant.Outlined" 
+                                                      Color="Color.Secondary" 
+                                                      Size="Size.Small"
+                                                      OnClick="@(() => LeaveReview(appointment))">
+                                                Оставить отзыв
+                                            </MudButton>
+                                        }
+                                    </MudStack>
+                                </MudItem>
+                            </MudGrid>
+                            
+                            @if (!string.IsNullOrEmpty(appointment.PatientNotes) || !string.IsNullOrEmpty(appointment.DoctorNotes))
+                            {
+                                <MudDivider Class="my-3" />
+                                @if (!string.IsNullOrEmpty(appointment.PatientNotes))
+                                {
+                                    <MudText Typo="Typo.body2" Class="mb-2">
+                                        <strong>Ваш комментарий:</strong> @appointment.PatientNotes
+                                    </MudText>
+                                }
+                                @if (!string.IsNullOrEmpty(appointment.DoctorNotes))
+                                {
+                                    <MudText Typo="Typo.body2">
+                                        <strong>Комментарий врача:</strong> @appointment.DoctorNotes
+                                    </MudText>
+                                }
+                            }
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+
+        @if (!filteredAppointments.Any())
+        {
+            <MudAlert Severity="Severity.Info">
+                По выбранным фильтрам записи не найдены
+            </MudAlert>
+        }
+    }
+    else
+    {
+        <!-- Empty State -->
+        <MudPaper Class="pa-8 text-center" Elevation="1">
+            <MudIcon Icon="Icons.Material.Filled.CalendarToday" Size="Size.Large" Color="Color.Secondary" Class="mb-4" />
+            <MudText Typo="Typo.h5" Class="mb-4">У вас пока нет записей</MudText>
+            <MudText Typo="Typo.body1" Class="mb-6">
+                Найдите подходящего врача и запишитесь на прием
+            </MudText>
+            <MudButton Variant="Variant.Filled" 
+                      Color="Color.Primary" 
+                      Size="Size.Large"
+                      OnClick="@(() => Navigation.NavigateTo("/search"))">
+                Найти врача
+            </MudButton>
+        </MudPaper>
+    }
+</MudContainer>
+
+@code {
+    private List<AppointmentDto> appointments = new();
+    private List<AppointmentDto> filteredAppointments = new();
+    private bool isLoading = true;
+    private string? selectedStatus;
+    private DateTime? fromDate;
+    private DateTime? toDate;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var currentUser = await AuthService.GetCurrentUserAsync();
+            if (currentUser == null)
+            {
+                Navigation.NavigateTo("/login");
+                return;
+            }
+
+            appointments = await AppointmentService.GetPatientAppointmentsAsync(currentUser.Id);
+            filteredAppointments = appointments;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Ошибка загрузки записей: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void FilterAppointments()
+    {
+        var query = appointments.AsQueryable();
+
+        if (!string.IsNullOrEmpty(selectedStatus))
+        {
+            query = query.Where(a => a.Status == selectedStatus);
+        }
+
+        if (fromDate.HasValue)
+        {
+            query = query.Where(a => a.StartTime.Date >= fromDate.Value.Date);
+        }
+
+        if (toDate.HasValue)
+        {
+            query = query.Where(a => a.StartTime.Date <= toDate.Value.Date);
+        }
+
+        filteredAppointments = query.ToList();
+    }
+
+    private Color GetStatusColor(string status) => status switch
+    {
+        "Requested" => Color.Warning,
+        "Confirmed" => Color.Success,
+        "InProgress" => Color.Primary,
+        "Completed" => Color.Info,
+        "Cancelled" => Color.Error,
+        _ => Color.Default
+    };
+
+    private string GetStatusText(string status) => status switch
+    {
+        "Requested" => "Ожидает подтверждения",
+        "Confirmed" => "Подтверждена",
+        "InProgress" => "В процессе",
+        "Completed" => "Завершена",
+        "Cancelled" => "Отменена",
+        "NoShow" => "Неявка",
+        _ => status
+    };
+
+    private async Task CancelAppointment(AppointmentDto appointment)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", $"Вы уверены, что хотите отменить запись к {appointment.DoctorName} на {appointment.StartTime:dd.MM.yyyy HH:mm}?");
+        parameters.Add("ButtonText", "Отменить запись");
+        parameters.Add("Color", Color.Warning);
+
+        var options = new DialogOptions() { CloseOnEscapeKey = true };
+        var dialog = await DialogService.ShowAsync<MudMessageBox>("Отмена записи", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            try
+            {
+                var success = await AppointmentService.CancelAppointmentAsync(appointment.Id);
+                if (success)
+                {
+                    appointment.Status = "Cancelled";
+                    Snackbar.Add("Запись успешно отменена", Severity.Success);
+                }
+                else
+                {
+                    Snackbar.Add("Не удалось отменить запись", Severity.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add($"Ошибка при отмене записи: {ex.Message}", Severity.Error);
+            }
+        }
+    }
+
+    private void ViewDetails(AppointmentDto appointment)
+    {
+        // В реальном приложении можно открыть модальное окно с деталями
+        Snackbar.Add("Детали записи (функция в разработке)", Severity.Info);
+    }
+
+    private void LeaveReview(AppointmentDto appointment)
+    {
+        // В реальном приложении можно открыть модальное окно для отзыва
+        Snackbar.Add("Форма отзыва (функция в разработке)", Severity.Info);
+    }
+}

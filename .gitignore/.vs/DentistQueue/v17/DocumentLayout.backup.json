@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\MVP_dentist_queue\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|e:\\mvp_dentist_queue\\shared\\dentistqueue.shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|solutionrelative:shared\\dentistqueue.shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2523C9A9-D403-4D46-B780-62A5BA2DF943}|Client\\DentistQueue.Client.csproj|e:\\mvp_dentist_queue\\client\\dentistqueue.client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2523C9A9-D403-4D46-B780-62A5BA2DF943}|Client\\DentistQueue.Client.csproj|solutionrelative:client\\dentistqueue.client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DentistQueue.Client",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\DentistQueue.Client.csproj",
+              "RelativeDocumentMoniker": "Client\\DentistQueue.Client.csproj",
+              "ToolTip": "E:\\MVP_dentist_queue\\Client\\DentistQueue.Client.csproj",
+              "RelativeToolTip": "Client\\DentistQueue.Client.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-03T13:21:09.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DentistQueue.Shared",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Shared\\DentistQueue.Shared.csproj",
+              "RelativeDocumentMoniker": "Shared\\DentistQueue.Shared.csproj",
+              "ToolTip": "E:\\MVP_dentist_queue\\Shared\\DentistQueue.Shared.csproj",
+              "RelativeToolTip": "Shared\\DentistQueue.Shared.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-03T13:21:05.666Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

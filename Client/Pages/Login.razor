@@ -1,0 +1,138 @@
+@page "/login"
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+<PageTitle>Вход в систему</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Class="pa-8 mt-8" Elevation="4">
+        <MudText Typo="Typo.h4" Class="text-center mb-6">Вход в систему</MudText>
+        
+        <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+            
+            <MudStack Spacing="4">
+                <MudTextField @bind-Value="loginModel.Email"
+                             Label="Email"
+                             Variant="Variant.Outlined"
+                             For="@(() => loginModel.Email)"
+                             Adornment="Adornment.Start"
+                             AdornmentIcon="Icons.Material.Filled.Email" />
+
+                <MudTextField @bind-Value="loginModel.Password"
+                             Label="Пароль"
+                             Variant="Variant.Outlined"
+                             InputType="@passwordInputType"
+                             Adornment="Adornment.End"
+                             AdornmentIcon="@passwordIcon"
+                             OnAdornmentClick="TogglePasswordVisibility"
+                             For="@(() => loginModel.Password)" />
+
+                <MudCheckBox @bind-Value="loginModel.RememberMe" 
+                            Label="Запомнить меня" 
+                            Color="Color.Primary" />
+
+                <MudButton ButtonType="ButtonType.Submit"
+                          Variant="Variant.Filled"
+                          Color="Color.Primary"
+                          Size="Size.Large"
+                          FullWidth="true"
+                          Disabled="isLoading">
+                    @if (isLoading)
+                    {
+                        <MudProgressCircular Class="mr-2" Size="Size.Small" Indeterminate="true" />
+                        <MudText>Вход...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Войти</MudText>
+                    }
+                </MudButton>
+
+                <MudDivider />
+
+                <MudText Class="text-center">
+                    Нет аккаунта? 
+                    <MudLink Href="/register" Color="Color.Primary">Зарегистрироваться</MudLink>
+                </MudText>
+
+                <MudText Class="text-center">
+                    <MudLink Href="/forgot-password" Color="Color.Secondary">Забыли пароль?</MudLink>
+                </MudText>
+            </MudStack>
+        </EditForm>
+
+        <!-- Demo credentials -->
+        <MudAlert Severity="Severity.Info" Class="mt-4">
+            <MudText Typo="Typo.subtitle2" Class="mb-2">Демо-данные для входа:</MudText>
+            <MudText Typo="Typo.body2">
+                <strong>Пациент:</strong> patient@example.com / 123456<br/>
+                <strong>Врач:</strong> doctor@example.com / 123456
+            </MudText>
+        </MudAlert>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private LoginDto loginModel = new();
+    private bool isLoading = false;
+    private bool showPassword = false;
+
+    private InputType passwordInputType => showPassword ? InputType.Text : InputType.Password;
+    private string passwordIcon => showPassword ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
+    }
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            isLoading = true;
+            
+            var result = await AuthService.LoginAsync(loginModel);
+            
+            if (result.Success)
+            {
+                Snackbar.Add($"Добро пожаловать, {result.User?.FullName}!", Severity.Success);
+                
+                // Перенаправляем в зависимости от роли
+                var redirectUrl = result.User?.Role switch
+                {
+                    "Doctor" => "/doctor/appointments",
+                    "Admin" => "/admin/dashboard",
+                    _ => "/"
+                };
+                
+                Navigation.NavigateTo(redirectUrl);
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    Snackbar.Add(error, Severity.Error);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Ошибка при входе: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Если пользователь уже авторизован, перенаправляем его
+        if (await AuthService.IsAuthenticatedAsync())
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+}

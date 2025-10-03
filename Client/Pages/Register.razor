@@ -1,0 +1,165 @@
+@page "/register"
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+<PageTitle>Регистрация</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Class="pa-8 mt-8" Elevation="4">
+        <MudText Typo="Typo.h4" Class="text-center mb-6">Регистрация</MudText>
+        
+        <EditForm Model="registerModel" OnValidSubmit="HandleRegister">
+            <DataAnnotationsValidator />
+            
+            <MudStack Spacing="4">
+                <MudTextField @bind-Value="registerModel.FullName"
+                             Label="Полное имя"
+                             Variant="Variant.Outlined"
+                             For="@(() => registerModel.FullName)"
+                             Adornment="Adornment.Start"
+                             AdornmentIcon="Icons.Material.Filled.Person" />
+
+                <MudTextField @bind-Value="registerModel.Email"
+                             Label="Email"
+                             Variant="Variant.Outlined"
+                             For="@(() => registerModel.Email)"
+                             Adornment="Adornment.Start"
+                             AdornmentIcon="Icons.Material.Filled.Email" />
+
+                <MudTextField @bind-Value="registerModel.Phone"
+                             Label="Телефон"
+                             Variant="Variant.Outlined"
+                             For="@(() => registerModel.Phone)"
+                             Adornment="Adornment.Start"
+                             AdornmentIcon="Icons.Material.Filled.Phone" />
+
+                <MudSelect @bind-Value="registerModel.Role" 
+                          Label="Тип аккаунта" 
+                          Variant="Variant.Outlined"
+                          AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem Value="@("Patient")">Пациент</MudSelectItem>
+                    <MudSelectItem Value="@("Doctor")">Врач</MudSelectItem>
+                </MudSelect>
+
+                <MudTextField @bind-Value="registerModel.Password"
+                             Label="Пароль"
+                             Variant="Variant.Outlined"
+                             InputType="@passwordInputType"
+                             Adornment="Adornment.End"
+                             AdornmentIcon="@passwordIcon"
+                             OnAdornmentClick="TogglePasswordVisibility"
+                             For="@(() => registerModel.Password)" />
+
+                <MudTextField @bind-Value="registerModel.ConfirmPassword"
+                             Label="Подтвердите пароль"
+                             Variant="Variant.Outlined"
+                             InputType="@confirmPasswordInputType"
+                             Adornment="Adornment.End"
+                             AdornmentIcon="@confirmPasswordIcon"
+                             OnAdornmentClick="ToggleConfirmPasswordVisibility"
+                             For="@(() => registerModel.ConfirmPassword)" />
+
+                <MudCheckBox @bind-Value="agreeToTerms" 
+                            Label="Я согласен с условиями использования и политикой конфиденциальности" 
+                            Color="Color.Primary" />
+
+                <MudButton ButtonType="ButtonType.Submit"
+                          Variant="Variant.Filled"
+                          Color="Color.Primary"
+                          Size="Size.Large"
+                          FullWidth="true"
+                          Disabled="@(isLoading || !agreeToTerms)">
+                    @if (isLoading)
+                    {
+                        <MudProgressCircular Class="mr-2" Size="Size.Small" Indeterminate="true" />
+                        <MudText>Регистрация...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Зарегистрироваться</MudText>
+                    }
+                </MudButton>
+
+                <MudDivider />
+
+                <MudText Class="text-center">
+                    Уже есть аккаунт? 
+                    <MudLink Href="/login" Color="Color.Primary">Войти</MudLink>
+                </MudText>
+            </MudStack>
+        </EditForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private RegisterDto registerModel = new() { Role = "Patient" };
+    private bool isLoading = false;
+    private bool agreeToTerms = false;
+    private bool showPassword = false;
+    private bool showConfirmPassword = false;
+
+    private InputType passwordInputType => showPassword ? InputType.Text : InputType.Password;
+    private string passwordIcon => showPassword ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
+    
+    private InputType confirmPasswordInputType => showConfirmPassword ? InputType.Text : InputType.Password;
+    private string confirmPasswordIcon => showConfirmPassword ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
+    }
+
+    private void ToggleConfirmPasswordVisibility()
+    {
+        showConfirmPassword = !showConfirmPassword;
+    }
+
+    private async Task HandleRegister()
+    {
+        try
+        {
+            isLoading = true;
+            
+            var result = await AuthService.RegisterAsync(registerModel);
+            
+            if (result.Success)
+            {
+                Snackbar.Add($"Добро пожаловать, {result.User?.FullName}! Регистрация прошла успешно.", Severity.Success);
+                
+                // Перенаправляем в зависимости от роли
+                var redirectUrl = result.User?.Role switch
+                {
+                    "Doctor" => "/doctor/profile", // Врачу нужно заполнить профиль
+                    _ => "/"
+                };
+                
+                Navigation.NavigateTo(redirectUrl);
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    Snackbar.Add(error, Severity.Error);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Ошибка при регистрации: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Если пользователь уже авторизован, перенаправляем его
+        if (await AuthService.IsAuthenticatedAsync())
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+}

@@ -1,0 +1,11 @@
+E:\MVP_dentist_queue\Shared\bin\Debug\net9.0\DentistQueue.Shared.deps.json
+E:\MVP_dentist_queue\Shared\bin\Debug\net9.0\DentistQueue.Shared.dll
+E:\MVP_dentist_queue\Shared\bin\Debug\net9.0\DentistQueue.Shared.pdb
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.AssemblyInfoInputs.cache
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.AssemblyInfo.cs
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.csproj.CoreCompileInputs.cache
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.dll
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\refint\DentistQueue.Shared.dll
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\DentistQueue.Shared.pdb
+E:\MVP_dentist_queue\Shared\obj\Debug\net9.0\ref\DentistQueue.Shared.dll

@@ -1,0 +1,80 @@
+﻿@inject IAuthService AuthService
+
+<MudNavMenu>
+    <MudNavLink Href="/" Icon="Icons.Material.Filled.Home" Match="NavLinkMatch.All">
+        Главная
+    </MudNavLink>
+    
+    <MudNavLink Href="/search" Icon="Icons.Material.Filled.Search">
+        Поиск врачей
+    </MudNavLink>
+
+    @if (currentUser != null)
+    {
+        @if (currentUser.Role == "Patient")
+        {
+            <MudNavLink Href="/appointments" Icon="Icons.Material.Filled.CalendarToday">
+                Мои записи
+            </MudNavLink>
+            <MudNavLink Href="/profile" Icon="Icons.Material.Filled.Person">
+                Профиль
+            </MudNavLink>
+        }
+        else if (currentUser.Role == "Doctor")
+        {
+            <MudNavGroup Title="Врач" Icon="Icons.Material.Filled.LocalHospital" Expanded="true">
+                <MudNavLink Href="/doctor/appointments" Icon="Icons.Material.Filled.CalendarToday">
+                    Расписание
+                </MudNavLink>
+                <MudNavLink Href="/doctor/profile" Icon="Icons.Material.Filled.Person">
+                    Мой профиль
+                </MudNavLink>
+                <MudNavLink Href="/doctor/services" Icon="Icons.Material.Filled.MedicalServices">
+                    Услуги
+                </MudNavLink>
+                <MudNavLink Href="/doctor/schedule" Icon="Icons.Material.Filled.Schedule">
+                    График работы
+                </MudNavLink>
+            </MudNavGroup>
+        }
+    }
+    else
+    {
+        <MudNavLink Href="/login" Icon="Icons.Material.Filled.Login">
+            Войти
+        </MudNavLink>
+        <MudNavLink Href="/register" Icon="Icons.Material.Filled.PersonAdd">
+            Регистрация
+        </MudNavLink>
+    }
+
+    <MudDivider Class="my-2" />
+    
+    <MudNavLink Href="/about" Icon="Icons.Material.Filled.Info">
+        О сервисе
+    </MudNavLink>
+    <MudNavLink Href="/contact" Icon="Icons.Material.Filled.ContactMail">
+        Контакты
+    </MudNavLink>
+</MudNavMenu>
+
+@code {
+    private UserDto? currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        AuthService.OnAuthStateChanged += OnAuthStateChanged;
+    }
+
+    private void OnAuthStateChanged(UserDto? user)
+    {
+        currentUser = user;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AuthService.OnAuthStateChanged -= OnAuthStateChanged;
+    }
+}

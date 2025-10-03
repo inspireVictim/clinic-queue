@@ -1,0 +1,135 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<PageTitle>Стоматологическая очередь - Главная</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <!-- Hero Section -->
+    <MudPaper Class="pa-8 mb-6" Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;" Elevation="0">
+        <MudGrid AlignItems="AlignItems.Center">
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.h2" Class="mb-4 font-weight-bold">
+                    Запись к стоматологу онлайн
+                </MudText>
+                <MudText Typo="Typo.h6" Class="mb-6">
+                    Найдите лучших специалистов, запишитесь на прием и следите за своим здоровьем зубов легко и удобно
+                </MudText>
+                <MudButton Variant="Variant.Filled" 
+                          Color="Color.Warning" 
+                          Size="Size.Large" 
+                          Class="mr-4"
+                          OnClick="@(() => Navigation.NavigateTo("/search"))">
+                    Найти врача
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" 
+                          Color="Color.Inherit" 
+                          Size="Size.Large"
+                          OnClick="@(() => Navigation.NavigateTo("/register"))">
+                    Регистрация
+                </MudButton>
+            </MudItem>
+            <MudItem xs="12" md="6" Class="text-center">
+                <MudIcon Icon="Icons.Material.Filled.LocalHospital" Size="Size.Large" Style="font-size: 200px;" />
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <!-- Features Section -->
+    <MudText Typo="Typo.h4" Class="text-center mb-6">Наши преимущества</MudText>
+    
+    <MudGrid>
+        <MudItem xs="12" md="4">
+            <MudCard Class="pa-4 h-100">
+                <MudCardContent Class="text-center">
+                    <MudIcon Icon="Icons.Material.Filled.Search" Color="Color.Primary" Size="Size.Large" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-3">Легкий поиск</MudText>
+                    <MudText>Найдите врача по специализации, рейтингу, цене и удобному времени приема</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        
+        <MudItem xs="12" md="4">
+            <MudCard Class="pa-4 h-100">
+                <MudCardContent Class="text-center">
+                    <MudIcon Icon="Icons.Material.Filled.CalendarToday" Color="Color.Primary" Size="Size.Large" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-3">Онлайн запись</MudText>
+                    <MudText>Записывайтесь на прием в удобное время без звонков и очередей</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        
+        <MudItem xs="12" md="4">
+            <MudCard Class="pa-4 h-100">
+                <MudCardContent Class="text-center">
+                    <MudIcon Icon="Icons.Material.Filled.Notifications" Color="Color.Primary" Size="Size.Large" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-3">Напоминания</MudText>
+                    <MudText>Получайте уведомления о предстоящих приемах и важных событиях</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Statistics Section -->
+    <MudPaper Class="pa-6 mt-8" Elevation="1">
+        <MudText Typo="Typo.h5" Class="text-center mb-6">Нам доверяют</MudText>
+        <MudGrid>
+            <MudItem xs="6" md="3" Class="text-center">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Class="font-weight-bold">150+</MudText>
+                <MudText>Врачей</MudText>
+            </MudItem>
+            <MudItem xs="6" md="3" Class="text-center">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Class="font-weight-bold">50+</MudText>
+                <MudText>Клиник</MudText>
+            </MudItem>
+            <MudItem xs="6" md="3" Class="text-center">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Class="font-weight-bold">5000+</MudText>
+                <MudText>Пациентов</MudText>
+            </MudItem>
+            <MudItem xs="6" md="3" Class="text-center">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Class="font-weight-bold">4.8</MudText>
+                <MudText>Средний рейтинг</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <!-- How it works -->
+    <MudText Typo="Typo.h4" Class="text-center mt-8 mb-6">Как это работает</MudText>
+    
+    <MudGrid>
+        <MudItem xs="12" md="3" Class="text-center">
+            <MudIcon Icon="Icons.Material.Filled.PersonSearch" Color="Color.Secondary" Size="Size.Large" Class="mb-3" />
+            <MudText Typo="Typo.h6" Class="mb-2">1. Найдите врача</MudText>
+            <MudText>Используйте фильтры для поиска подходящего специалиста</MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="3" Class="text-center">
+            <MudIcon Icon="Icons.Material.Filled.EventNote" Color="Color.Secondary" Size="Size.Large" Class="mb-3" />
+            <MudText Typo="Typo.h6" Class="mb-2">2. Выберите время</MudText>
+            <MudText>Посмотрите доступные слоты и выберите удобное время</MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="3" Class="text-center">
+            <MudIcon Icon="Icons.Material.Filled.Payment" Color="Color.Secondary" Size="Size.Large" Class="mb-3" />
+            <MudText Typo="Typo.h6" Class="mb-2">3. Оплатите</MudText>
+            <MudText>Безопасная онлайн-оплата или оплата на месте</MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="3" Class="text-center">
+            <MudIcon Icon="Icons.Material.Filled.CheckCircle" Color="Color.Secondary" Size="Size.Large" Class="mb-3" />
+            <MudText Typo="Typo.h6" Class="mb-2">4. Приходите на прием</MudText>
+            <MudText>Получите напоминание и приходите в назначенное время</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <!-- CTA Section -->
+    <MudPaper Class="pa-6 mt-8 text-center" Elevation="2">
+        <MudText Typo="Typo.h5" Class="mb-4">Готовы начать?</MudText>
+        <MudText Class="mb-6">Присоединяйтесь к тысячам довольных пациентов</MudText>
+        <MudButton Variant="Variant.Filled" 
+                  Color="Color.Primary" 
+                  Size="Size.Large"
+                  OnClick="@(() => Navigation.NavigateTo("/search"))">
+            Найти врача сейчас
+        </MudButton>
+    </MudPaper>
+</MudContainer>
