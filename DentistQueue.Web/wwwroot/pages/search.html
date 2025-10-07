@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поиск врачей - DentistQueue</title>
+    <link href="../main.css" rel="stylesheet" />
+    <link href="../app.css" rel="stylesheet" />
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="../index.html" class="brand-link">
+                        <span class="brand-icon">🦷</span>
+                        <span class="brand-text">DentistQueue</span>
+                    </a>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="search.html" class="nav-link active">Поиск врачей</a>
+                    <a href="appointments.html" class="nav-link">Мои записи</a>
+                    <a href="about.html" class="nav-link">О сервисе</a>
+                    <a href="contact.html" class="nav-link">Контакты</a>
+                </div>
+                <div class="nav-auth" id="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Войти</a>
+                    <a href="register.html" class="btn btn-primary">Регистрация</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Поисковая секция -->
+            <section class="search-section">
+                <div class="container">
+                    <div class="search-header">
+                        <h1 class="page-title">Найти врача</h1>
+                        <p class="page-subtitle">Выберите специалиста по вашим критериям</p>
+                    </div>
+                    
+                    <!-- Фильтры -->
+                    <div class="filters-container">
+                        <form class="filters-form" id="search-form">
+                            <div class="filters-grid">
+                                <div class="filter-group">
+                                    <label class="filter-label">Город</label>
+                                    <select class="filter-select" id="city-filter">
+                                        <option value="">Все города</option>
+                                        <option value="Москва">Москва</option>
+                                        <option value="Санкт-Петербург">Санкт-Петербург</option>
+                                        <option value="Новосибирск">Новосибирск</option>
+                                        <option value="Екатеринбург">Екатеринбург</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">Специализация</label>
+                                    <select class="filter-select" id="specialization-filter">
+                                        <option value="">Все специализации</option>
+                                        <option value="Стоматолог-терапевт">Стоматолог-терапевт</option>
+                                        <option value="Стоматолог-хирург">Стоматолог-хирург</option>
+                                        <option value="Ортодонт">Ортодонт</option>
+                                        <option value="Детский стоматолог">Детский стоматолог</option>
+                                        <option value="Имплантолог">Имплантолог</option>
+                                        <option value="Ортопед">Ортопед</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">Цена от</label>
+                                    <input type="number" class="filter-input" id="min-price" placeholder="0" min="0">
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">Цена до</label>
+                                    <input type="number" class="filter-input" id="max-price" placeholder="50000" min="0">
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">Рейтинг от</label>
+                                    <select class="filter-select" id="rating-filter">
+                                        <option value="">Любой рейтинг</option>
+                                        <option value="4.5">4.5+</option>
+                                        <option value="4.0">4.0+</option>
+                                        <option value="3.5">3.5+</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">Сортировка</label>
+                                    <select class="filter-select" id="sort-filter">
+                                        <option value="rating">По рейтингу</option>
+                                        <option value="price">По цене</option>
+                                        <option value="experience">По опыту</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="filters-actions">
+                                <button type="submit" class="btn btn-primary btn-search">
+                                    <span class="btn-text">Найти врачей</span>
+                                    <span class="btn-icon">🔍</span>
+                                </button>
+                                <button type="button" class="btn btn-outline" id="clear-filters">
+                                    Очистить фильтры
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Результаты поиска -->
+            <section class="results-section">
+                <div class="container">
+                    <div class="results-header">
+                        <div class="results-info">
+                            <h2>Найдено врачей: <span id="results-count">0</span></h2>
+                            <p id="search-query"></p>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid" title="Сетка">
+                                <span>⊞</span>
+                            </button>
+                            <button class="view-btn" data-view="list" title="Список">
+                                <span>☰</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="doctors-container" id="doctors-container">
+                        <div class="doctors-grid" id="doctors-grid">
+                            <!-- Результаты будут загружены через JavaScript -->
+                            <div class="loading-placeholder">
+                                <div class="loading-spinner"></div>
+                                <p>Загружаем врачей...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Пагинация -->
+                        <div class="pagination" id="pagination" style="display: none;">
+                            <!-- Пагинация будет создана через JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-brand">
+                            <span class="brand-icon">🦷</span>
+                            <span class="brand-text">DentistQueue</span>
+                        </div>
+                        <p class="footer-description">Сервис онлайн-записи к стоматологам. Мы помогаем найти лучших специалистов и записаться на прием быстро и удобно.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Сервис</h4>
+                        <ul class="footer-links">
+                            <li><a href="search.html">Поиск врачей</a></li>
+                            <li><a href="appointments.html">Мои записи</a></li>
+                            <li><a href="about.html">О сервисе</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Поддержка</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:support@dentistqueue.com">📧 support@dentistqueue.com</a></li>
+                            <li><a href="tel:+78001234567">📞 +7 (800) 123-45-67</a></li>
+                            <li><a href="#">❓ Помощь</a></li>
+                            <li><a href="#">📋 FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Правовая информация</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Пользовательское соглашение</a></li>
+                            <li><a href="#">Политика конфиденциальности</a></li>
+                            <li><a href="#">Условия использования</a></li>
+                            <li><a href="#">Возврат средств</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <p>&copy; 2024 DentistQueue. Все права защищены.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Карта сайта</a>
+                            <a href="#">Разработчикам</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications-container" class="notifications-container"></div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        // Дополнительная логика для страницы поиска
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('search-form');
+            const clearFiltersBtn = document.getElementById('clear-filters');
+            const viewButtons = document.querySelectorAll('.view-btn');
+            const doctorsGrid = document.getElementById('doctors-grid');
+            
+            // Обработка формы поиска
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                performSearch();
+            });
+            
+            // Очистка фильтров
+            clearFiltersBtn.addEventListener('click', function() {
+                searchForm.reset();
+                performSearch();
+            });
+            
+            // Переключение вида
+            viewButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const view = this.dataset.view;
+                    doctorsGrid.className = view === 'list' ? 'doctors-list' : 'doctors-grid';
+                });
+            });
+            
+            // Выполнение поиска
+            function performSearch() {
+                const formData = new FormData(searchForm);
+                const filters = Object.fromEntries(formData);
+                
+                // Обновляем счетчик результатов
+                document.getElementById('results-count').textContent = '4'; // Mock данные
+                
+                // Показываем результаты
+                showSearchResults();
+            }
+            
+            // Показ результатов поиска
+            function showSearchResults() {
+                doctorsGrid.innerHTML = `
+                    <div class="doctor-card">
+                        <div class="doctor-photo">
+                            <img src="https://via.placeholder.com/300x300/1976d2/ffffff?text=ИИИ" alt="Иванов Иван Иванович">
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Иванов Иван Иванович</h3>
+                            <p class="doctor-specialization">Стоматолог-терапевт, Эндодонтист</p>
+                            <div class="doctor-rating">
+                                <div class="rating">
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                </div>
+                                <span>4.8 (127 отзывов)</span>
+                            </div>
+                            <p class="doctor-clinic">Стоматология 'Улыбка', Москва</p>
+                            <p class="doctor-experience">Опыт работы: 8 лет</p>
+                            <div class="doctor-price">от 1500 ₽</div>
+                            <button class="btn btn-primary" onclick="app.showDoctorDetails('1')">
+                                Записаться на прием
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="doctor-card">
+                        <div class="doctor-photo">
+                            <img src="https://via.placeholder.com/300x300/42a5f5/ffffff?text=ПАС" alt="Петрова Анна Сергеевна">
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Петрова Анна Сергеевна</h3>
+                            <p class="doctor-specialization">Стоматолог-хирург, Имплантолог</p>
+                            <div class="doctor-rating">
+                                <div class="rating">
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                </div>
+                                <span>4.9 (89 отзывов)</span>
+                            </div>
+                            <p class="doctor-clinic">Медицинский центр 'Здоровье', Москва</p>
+                            <p class="doctor-experience">Опыт работы: 12 лет</p>
+                            <div class="doctor-price">от 2000 ₽</div>
+                            <button class="btn btn-primary" onclick="app.showDoctorDetails('2')">
+                                Записаться на прием
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="doctor-card">
+                        <div class="doctor-photo">
+                            <img src="https://via.placeholder.com/300x300/66bb6a/ffffff?text=СМП" alt="Сидоров Михаил Петрович">
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Сидоров Михаил Петрович</h3>
+                            <p class="doctor-specialization">Ортодонт, Ортопед</p>
+                            <div class="doctor-rating">
+                                <div class="rating">
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star">☆</span>
+                                </div>
+                                <span>4.7 (156 отзывов)</span>
+                            </div>
+                            <p class="doctor-clinic">Клиника 'Белые зубы', Санкт-Петербург</p>
+                            <p class="doctor-experience">Опыт работы: 15 лет</p>
+                            <div class="doctor-price">от 15000 ₽</div>
+                            <button class="btn btn-primary" onclick="app.showDoctorDetails('3')">
+                                Записаться на прием
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="doctor-card">
+                        <div class="doctor-photo">
+                            <img src="https://via.placeholder.com/300x300/ff7043/ffffff?text=КЕВ" alt="Козлова Елена Владимировна">
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Козлова Елена Владимировна</h3>
+                            <p class="doctor-specialization">Детский стоматолог, Стоматолог-терапевт</p>
+                            <div class="doctor-rating">
+                                <div class="rating">
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                    <span class="rating-star active">★</span>
+                                </div>
+                                <span>4.9 (203 отзыва)</span>
+                            </div>
+                            <p class="doctor-clinic">Детская стоматология 'Радуга', Москва</p>
+                            <p class="doctor-experience">Опыт работы: 10 лет</p>
+                            <div class="doctor-price">от 1000 ₽</div>
+                            <button class="btn btn-primary" onclick="app.showDoctorDetails('4')">
+                                Записаться на прием
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Загружаем результаты при загрузке страницы
+            performSearch();
+        });
+    </script>
+</body>
+</html>

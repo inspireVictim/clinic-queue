@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DentistQueue.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e23b104dfc13480105de4bb268fd981dbd5f3607")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c10b0a0719b32bbf4cddeb5d21938588d2e0a2d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DentistQueue.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DentistQueue.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

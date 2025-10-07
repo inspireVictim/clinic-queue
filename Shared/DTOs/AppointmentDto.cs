@@ -26,6 +26,9 @@ public class AppointmentDto
 public class CreateAppointmentDto
 {
     [Required]
+    public Guid PatientId { get; set; }
+
+    [Required]
     public Guid DoctorId { get; set; }
 
     [Required]

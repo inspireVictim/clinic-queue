@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DentistQueue - Онлайн запись к стоматологам</title>
+    <link href="main.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1976d2">
+    <meta name="description" content="Сервис онлайн-записи к стоматологам. Найдите лучшего врача и запишитесь на прием онлайн.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="/" class="brand-link">
+                        <span class="brand-icon">🦷</span>
+                        <span class="brand-text">DentistQueue</span>
+                    </a>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="/" class="nav-link active">Главная</a>
+                    <a href="pages/search.html" class="nav-link">Поиск врачей</a>
+                    <a href="pages/appointments.html" class="nav-link">Мои записи</a>
+                    <a href="pages/about.html" class="nav-link">О сервисе</a>
+                    <a href="pages/contact.html" class="nav-link">Контакты</a>
+                </div>
+                <div class="nav-auth" id="nav-auth">
+                    <a href="pages/login.html" class="btn btn-outline">Войти</a>
+                    <a href="pages/register.html" class="btn btn-primary">Регистрация</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Hero секция -->
+            <section class="hero-section">
+                <div class="hero-background"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Найдите лучшего стоматолога</h1>
+                        <p class="hero-subtitle">Запишитесь на прием онлайн к проверенным специалистам в вашем городе</p>
+                        
+                        <!-- Поисковая форма -->
+                        <div class="search-form-container">
+                            <form class="search-form" id="hero-search-form">
+                                <div class="search-input-group">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="hero-city" placeholder="Город" class="form-input">
+                                        <span class="input-icon">📍</span>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="hero-specialization" placeholder="Специализация" class="form-input">
+                                        <span class="input-icon">👨‍⚕️</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-search">
+                                        <span class="btn-text">Найти врача</span>
+                                        <span class="btn-icon">🔍</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Статистика -->
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Врачей</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">10,000+</span>
+                                <span class="stat-label">Пациентов</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Клиник</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Преимущества -->
+            <section class="features-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Почему выбирают нас</h2>
+                        <p class="section-subtitle">Мы делаем запись к стоматологу простой и удобной</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">📅</span>
+                            </div>
+                            <h3 class="feature-title">Удобная запись</h3>
+                            <p class="feature-description">Выберите удобное время и запишитесь онлайн за несколько кликов</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">⭐</span>
+                            </div>
+                            <h3 class="feature-title">Проверенные врачи</h3>
+                            <p class="feature-description">Только квалифицированные специалисты с отзывами и рейтингами</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">💰</span>
+                            </div>
+                            <h3 class="feature-title">Прозрачные цены</h3>
+                            <p class="feature-description">Все цены указаны заранее, без скрытых платежей и доплат</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">🛡️</span>
+                            </div>
+                            <h3 class="feature-title">Безопасность</h3>
+                            <p class="feature-description">Ваши данные защищены современными методами шифрования</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">📱</span>
+                            </div>
+                            <h3 class="feature-title">Мобильное приложение</h3>
+                            <p class="feature-description">Управляйте записями с любого устройства</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <span class="icon">💬</span>
+                            </div>
+                            <h3 class="feature-title">Поддержка 24/7</h3>
+                            <p class="feature-description">Наша служба поддержки всегда готова помочь</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Популярные врачи -->
+            <section class="doctors-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Популярные врачи</h2>
+                        <p class="section-subtitle">Топ специалисты с высокими рейтингами</p>
+                        <a href="pages/search.html" class="btn btn-outline">Смотреть всех врачей</a>
+                    </div>
+                    
+                    <div class="doctors-grid" id="doctors-grid">
+                        <!-- Врачи будут загружены через JavaScript -->
+                        <div class="loading-placeholder">
+                            <div class="loading-spinner"></div>
+                            <p>Загружаем врачей...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA секция -->
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2 class="cta-title">Готовы записаться на прием?</h2>
+                        <p class="cta-subtitle">Найдите подходящего врача и запишитесь онлайн прямо сейчас</p>
+                        <div class="cta-buttons">
+                            <a href="pages/search.html" class="btn btn-primary btn-large">Найти врача</a>
+                            <a href="pages/register.html" class="btn btn-outline btn-large">Зарегистрироваться</a>
+                            <a href="pages/user-guide.html" class="btn btn-outline btn-large">Руководство пользователя</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-brand">
+                            <span class="brand-icon">🦷</span>
+                            <span class="brand-text">DentistQueue</span>
+                        </div>
+                        <p class="footer-description">Сервис онлайн-записи к стоматологам. Мы помогаем найти лучших специалистов и записаться на прием быстро и удобно.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="Telegram">📱</a>
+                            <a href="#" class="social-link" title="WhatsApp">💬</a>
+                            <a href="#" class="social-link" title="VK">📘</a>
+                            <a href="#" class="social-link" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Сервис</h4>
+                        <ul class="footer-links">
+                            <li><a href="pages/search.html">Поиск врачей</a></li>
+                            <li><a href="pages/appointments.html">Мои записи</a></li>
+                            <li><a href="pages/about.html">О сервисе</a></li>
+                            <li><a href="pages/contact.html">Контакты</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Поддержка</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:support@dentistqueue.com">📧 support@dentistqueue.com</a></li>
+                            <li><a href="tel:+78001234567">📞 +7 (800) 123-45-67</a></li>
+                            <li><a href="#">❓ Помощь</a></li>
+                            <li><a href="#">📋 FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Правовая информация</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Пользовательское соглашение</a></li>
+                            <li><a href="#">Политика конфиденциальности</a></li>
+                            <li><a href="#">Условия использования</a></li>
+                            <li><a href="#">Возврат средств</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <p>&copy; 2024 DentistQueue. Все права защищены.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Карта сайта</a>
+                            <a href="#">Разработчикам</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications-container" class="notifications-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

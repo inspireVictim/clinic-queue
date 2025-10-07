@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация - DentistQueue</title>
+    <link href="../main.css" rel="stylesheet" />
+    <link href="../app.css" rel="stylesheet" />
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="../index.html" class="brand-link">
+                        <span class="brand-icon">🦷</span>
+                        <span class="brand-text">DentistQueue</span>
+                    </a>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="search.html" class="nav-link">Поиск врачей</a>
+                    <a href="appointments.html" class="nav-link">Мои записи</a>
+                    <a href="about.html" class="nav-link">О сервисе</a>
+                    <a href="contact.html" class="nav-link">Контакты</a>
+                </div>
+                <div class="nav-auth" id="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Войти</a>
+                    <a href="register.html" class="btn btn-primary active">Регистрация</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <section class="auth-section">
+                <div class="container">
+                    <div class="auth-container">
+                        <div class="auth-card">
+                            <div class="auth-header">
+                                <h1 class="auth-title">Регистрация</h1>
+                                <p class="auth-subtitle">Создайте аккаунт для записи к врачам</p>
+                            </div>
+                            
+                            <form class="auth-form" id="register-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Имя</label>
+                                        <input type="text" class="form-control" id="firstName" required placeholder="Иван">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Фамилия</label>
+                                        <input type="text" class="form-control" id="lastName" required placeholder="Иванов">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required placeholder="your@email.com">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone" required placeholder="+7 (999) 123-45-67">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Пароль</label>
+                                    <input type="password" class="form-control" id="password" required placeholder="Минимум 6 символов">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Подтвердите пароль</label>
+                                    <input type="password" class="form-control" id="confirmPassword" required placeholder="Повторите пароль">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input type="checkbox" id="agree-terms" required>
+                                        <span class="checkmark"></span>
+                                        Я согласен с <a href="#" class="auth-link">условиями использования</a> и <a href="#" class="auth-link">политикой конфиденциальности</a>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-full">Зарегистрироваться</button>
+                                
+                                <div class="auth-links">
+                                    <p>Уже есть аккаунт? <a href="login.html" class="auth-link">Войти</a></p>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="auth-info">
+                            <h3>Преимущества регистрации</h3>
+                            <ul class="benefits-list">
+                                <li>📅 Быстрая запись к врачам</li>
+                                <li>📱 Уведомления о записях</li>
+                                <li>📋 История посещений</li>
+                                <li>⭐ Отзывы о врачах</li>
+                                <li>💳 Удобная оплата</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-brand">
+                            <span class="brand-icon">🦷</span>
+                            <span class="brand-text">DentistQueue</span>
+                        </div>
+                        <p class="footer-description">Сервис онлайн-записи к стоматологам. Мы помогаем найти лучших специалистов и записаться на прием быстро и удобно.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Сервис</h4>
+                        <ul class="footer-links">
+                            <li><a href="search.html">Поиск врачей</a></li>
+                            <li><a href="appointments.html">Мои записи</a></li>
+                            <li><a href="about.html">О сервисе</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Поддержка</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:support@dentistqueue.com">📧 support@dentistqueue.com</a></li>
+                            <li><a href="tel:+78001234567">📞 +7 (800) 123-45-67</a></li>
+                            <li><a href="#">❓ Помощь</a></li>
+                            <li><a href="#">📋 FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Правовая информация</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Пользовательское соглашение</a></li>
+                            <li><a href="#">Политика конфиденциальности</a></li>
+                            <li><a href="#">Условия использования</a></li>
+                            <li><a href="#">Возврат средств</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <p>&copy; 2024 DentistQueue. Все права защищены.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Карта сайта</a>
+                            <a href="#">Разработчикам</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications-container" class="notifications-container"></div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        // Логика регистрации
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Простая валидация
+                if (password !== confirmPassword) {
+                    alert('Пароли не совпадают');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    alert('Пароль должен содержать минимум 6 символов');
+                    return;
+                }
+                
+                // Создаем пользователя
+                const user = {
+                    id: Date.now(),
+                    name: `${firstName} ${lastName}`,
+                    email: email,
+                    phone: phone,
+                    role: 'patient'
+                };
+                
+                // Сохраняем в localStorage
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                alert('Регистрация успешна! Добро пожаловать!');
+                
+                // Перенаправляем на главную страницу
+                window.location.href = '../index.html';
+            });
+        });
+    </script>
+</body>
+</html>

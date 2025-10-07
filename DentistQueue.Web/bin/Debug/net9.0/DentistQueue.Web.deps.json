@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "DentistQueue.Web/1.0.0": {
+        "dependencies": {
+          "DentistQueue.Shared": "1.0.0"
+        },
+        "runtime": {
+          "DentistQueue.Web.dll": {}
+        }
+      },
+      "DentistQueue.Shared/1.0.0": {
+        "runtime": {
+          "DentistQueue.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DentistQueue.Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DentistQueue.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

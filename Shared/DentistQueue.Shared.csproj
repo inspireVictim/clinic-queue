@@ -4,6 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DentistQueue.Shared</RootNamespace>
+    <AssemblyName>DentistQueue.Shared</AssemblyName>
   </PropertyGroup>
 
 </Project>

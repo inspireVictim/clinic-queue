@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контакты - DentistQueue</title>
+    <link href="../main.css" rel="stylesheet" />
+    <link href="../app.css" rel="stylesheet" />
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="../index.html" class="brand-link">
+                        <span class="brand-icon">🦷</span>
+                        <span class="brand-text">DentistQueue</span>
+                    </a>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="search.html" class="nav-link">Поиск врачей</a>
+                    <a href="appointments.html" class="nav-link">Мои записи</a>
+                    <a href="about.html" class="nav-link">О сервисе</a>
+                    <a href="contact.html" class="nav-link active">Контакты</a>
+                </div>
+                <div class="nav-auth" id="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Войти</a>
+                    <a href="register.html" class="btn btn-primary">Регистрация</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <section class="contact-section">
+                <div class="container">
+                    <div class="page-header">
+                        <h1 class="page-title">Контакты</h1>
+                        <p class="page-subtitle">Свяжитесь с нами любым удобным способом</p>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <div class="contact-card">
+                                <div class="contact-icon">📧</div>
+                                <h3>Email</h3>
+                                <p>support@dentistqueue.com</p>
+                                <p>info@dentistqueue.com</p>
+                                <a href="mailto:support@dentistqueue.com" class="contact-link">Написать нам</a>
+                            </div>
+                            
+                            <div class="contact-card">
+                                <div class="contact-icon">📞</div>
+                                <h3>Телефон</h3>
+                                <p>+7 (800) 123-45-67</p>
+                                <p>Пн-Пт: 9:00 - 18:00</p>
+                                <a href="tel:+78001234567" class="contact-link">Позвонить</a>
+                            </div>
+                            
+                            <div class="contact-card">
+                                <div class="contact-icon">📍</div>
+                                <h3>Адрес</h3>
+                                <p>г. Москва, ул. Тверская, 15</p>
+                                <p>БЦ "Медицинский", офис 201</p>
+                                <a href="#" class="contact-link">Как добраться</a>
+                            </div>
+                            
+                            <div class="contact-card">
+                                <div class="contact-icon">💬</div>
+                                <h3>Чат поддержки</h3>
+                                <p>Онлайн консультация</p>
+                                <p>24/7</p>
+                                <button class="contact-link" onclick="openChat()">Начать чат</button>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form-container">
+                            <div class="contact-form-card">
+                                <h2>Напишите нам</h2>
+                                <p>Заполните форму, и мы свяжемся с вами в течение 24 часов</p>
+                                
+                                <form class="contact-form" id="contact-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Имя *</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Email *</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Телефон</label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Тема *</label>
+                                        <select class="form-control" id="subject" required>
+                                            <option value="">Выберите тему</option>
+                                            <option value="general">Общие вопросы</option>
+                                            <option value="technical">Техническая поддержка</option>
+                                            <option value="billing">Вопросы по оплате</option>
+                                            <option value="partnership">Партнерство</option>
+                                            <option value="feedback">Отзывы и предложения</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Сообщение *</label>
+                                        <textarea class="form-control" id="message" rows="5" required placeholder="Опишите ваш вопрос или предложение"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary btn-full">Отправить сообщение</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-section">
+                        <h2>Часто задаваемые вопросы</h2>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Как записаться к врачу?</h3>
+                                    <span class="faq-toggle">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Выберите врача на странице поиска, нажмите "Записаться на прием", выберите удобную дату и время, заполните форму записи.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Можно ли отменить запись?</h3>
+                                    <span class="faq-toggle">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Да, вы можете отменить запись в разделе "Мои записи" не позднее чем за 24 часа до приема.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Как оплачивается прием?</h3>
+                                    <span class="faq-toggle">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Оплата производится непосредственно в клинике после приема. Мы не взимаем комиссию за запись.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Работает ли сервис в других городах?</h3>
+                                    <span class="faq-toggle">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>В настоящее время сервис работает в Москве и Санкт-Петербурге. Планируется расширение на другие города.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-brand">
+                            <span class="brand-icon">🦷</span>
+                            <span class="brand-text">DentistQueue</span>
+                        </div>
+                        <p class="footer-description">Сервис онлайн-записи к стоматологам. Мы помогаем найти лучших специалистов и записаться на прием быстро и удобно.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Сервис</h4>
+                        <ul class="footer-links">
+                            <li><a href="search.html">Поиск врачей</a></li>
+                            <li><a href="appointments.html">Мои записи</a></li>
+                            <li><a href="about.html">О сервисе</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Поддержка</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:support@dentistqueue.com">📧 support@dentistqueue.com</a></li>
+                            <li><a href="tel:+78001234567">📞 +7 (800) 123-45-67</a></li>
+                            <li><a href="#">❓ Помощь</a></li>
+                            <li><a href="#">📋 FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4 class="footer-title">Правовая информация</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Пользовательское соглашение</a></li>
+                            <li><a href="#">Политика конфиденциальности</a></li>
+                            <li><a href="#">Условия использования</a></li>
+                            <li><a href="#">Возврат средств</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <p>&copy; 2024 DentistQueue. Все права защищены.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Карта сайта</a>
+                            <a href="#">Разработчикам</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications-container" class="notifications-container"></div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        // Логика страницы контактов
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            // Обработка формы контактов
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Имитация отправки
+                alert('Сообщение отправлено! Мы свяжемся с вами в течение 24 часов.');
+                contactForm.reset();
+            });
+            
+            // Обработка FAQ
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const toggle = item.querySelector('.faq-toggle');
+                
+                question.addEventListener('click', function() {
+                    const isOpen = answer.style.display === 'block';
+                    
+                    // Закрываем все другие FAQ
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-answer').style.display = 'none';
+                            otherItem.querySelector('.faq-toggle').textContent = '+';
+                        }
+                    });
+                    
+                    // Переключаем текущий FAQ
+                    if (isOpen) {
+                        answer.style.display = 'none';
+                        toggle.textContent = '+';
+                    } else {
+                        answer.style.display = 'block';
+                        toggle.textContent = '-';
+                    }
+                });
+            });
+        });
+        
+        // Функция для открытия чата
+        function openChat() {
+            alert('Чат поддержки будет доступен в следующей версии приложения');
+        }
+    </script>
+</body>
+</html>
