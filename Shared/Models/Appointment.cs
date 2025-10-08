@@ -26,6 +26,12 @@ public class Appointment
     public AvailabilitySlot? Slot { get; set; }
 
     [Required]
+    public DateTime AppointmentDate { get; set; }
+
+    [Required]
+    public TimeSpan AppointmentTime { get; set; }
+
+    [Required]
     public DateTime StartTime { get; set; }
 
     [Required]
@@ -52,6 +58,7 @@ public class Appointment
 public enum AppointmentStatus
 {
     Requested,
+    Pending,
     Confirmed,
     InProgress,
     Completed,

@@ -11,8 +11,11 @@ public class AppointmentDto
     public Guid DoctorId { get; set; }
     public string DoctorName { get; set; } = string.Empty;
     public Guid ServiceId { get; set; }
+    public string ServiceName { get; set; } = string.Empty;
     public string ServiceTitle { get; set; } = string.Empty;
     public decimal ServicePrice { get; set; }
+    public DateTime AppointmentDate { get; set; }
+    public TimeSpan AppointmentTime { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public string Status { get; set; } = string.Empty;

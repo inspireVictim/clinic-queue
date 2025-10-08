@@ -25,7 +25,7 @@ public class Clinic
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
 
-    public OpeningHours OpeningHours { get; set; } = new();
+    public string Description { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
@@ -37,6 +37,8 @@ public class Clinic
 
 public class OpeningHours
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid ClinicId { get; set; }
     public DaySchedule Monday { get; set; } = new();
     public DaySchedule Tuesday { get; set; } = new();
     public DaySchedule Wednesday { get; set; } = new();
@@ -48,6 +50,7 @@ public class OpeningHours
 
 public class DaySchedule
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public bool IsOpen { get; set; } = true;
     public TimeOnly OpenTime { get; set; } = new(9, 0);
     public TimeOnly CloseTime { get; set; } = new(18, 0);

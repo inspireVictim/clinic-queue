@@ -17,7 +17,7 @@ public class Service
     public string Description { get; set; } = string.Empty;
 
     [Range(15, 240)]
-    public int DurationMinutes { get; set; } = 30;
+    public int Duration { get; set; } = 30;
 
     [Range(0, double.MaxValue)]
     public decimal Price { get; set; }

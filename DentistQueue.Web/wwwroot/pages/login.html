@@ -130,7 +130,7 @@
                         <h4 class="footer-title">Поддержка</h4>
                         <ul class="footer-links">
                             <li><a href="mailto:support@dentistqueue.com">📧 support@dentistqueue.com</a></li>
-                            <li><a href="tel:+78001234567">📞 +7 (800) 123-45-67</a></li>
+                            <li><a href="tel:+996504876087">📞 +996 504 87 60 87</a></li>
                             <li><a href="#">❓ Помощь</a></li>
                             <li><a href="#">📋 FAQ</a></li>
                         </ul>
@@ -163,6 +163,7 @@
     <!-- Уведомления -->
     <div id="notifications-container" class="notifications-container"></div>
 
+    <script src="../js/auth-api.js"></script>
     <script src="../js/app.js"></script>
     
     <style>
@@ -193,6 +194,46 @@
         .role-btn:hover:not(.active) {
             background: #e8f4fd;
             color: #1976d2;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification-success {
+            background-color: #4caf50;
+        }
+        
+        .notification-error {
+            background-color: #f44336;
+        }
+        
+        .notification-info {
+            background-color: #2196f3;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .form-control:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
     </style>
     <script>
@@ -233,41 +274,70 @@
             }
             
             // Обработка формы входа
-            loginForm.addEventListener('submit', function(e) {
+            loginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('remember-me').checked;
                 
-                // Проверка для пациентов
-                if (currentRole === 'patient' && email === 'patient@example.com' && password === '123456') {
-                    const user = {
-                        id: 1,
-                        name: 'Иван Иванов',
-                        email: email,
-                        role: 'patient'
-                    };
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    window.location.href = '../index.html';
+                if (!email || !password) {
+                    showNotification('Пожалуйста, заполните все поля', 'error');
+                    return;
                 }
-                // Проверка для врачей
-                else if (currentRole === 'doctor' && email === 'doctor@example.com' && password === '123456') {
-                    const user = {
-                        id: 2,
-                        name: 'Иванов Иван Иванович',
-                        email: email,
-                        role: 'doctor',
-                        specializations: ['Стоматолог-терапевт', 'Эндодонтист'],
-                        clinic: 'Стоматология "Улыбка"'
-                    };
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    window.location.href = 'doctor-dashboard.html';
-                } else {
-                    const roleText = currentRole === 'doctor' ? 'врача' : 'пациента';
-                    alert(`Неверный email или пароль. Используйте демо-данные для ${roleText}`);
+                
+                try {
+                    // Показываем загрузку
+                    const submitBtn = loginForm.querySelector('button[type="submit"]');
+                    submitBtn.textContent = 'Вход...';
+                    submitBtn.disabled = true;
+                    
+                    // Входим в систему
+                    const result = await window.authAPI.login(email, password, rememberMe);
+                    
+                    if (result.success) {
+                        showNotification('Добро пожаловать!', 'success');
+                        
+                        // Перенаправляем в зависимости от роли
+                        setTimeout(() => {
+                            if (result.user.role.toLowerCase() === 'doctor') {
+                                window.location.href = 'doctor-dashboard.html';
+                            } else {
+                                window.location.href = '../index.html';
+                            }
+                        }, 1000);
+                    } else {
+                        const errorMessage = result.errors?.[0] || 'Неверный email или пароль';
+                        showNotification(errorMessage, 'error');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    showNotification('Ошибка при входе в систему', 'error');
+                } finally {
+                    // Восстанавливаем кнопку
+                    const submitBtn = loginForm.querySelector('button[type="submit"]');
+                    submitBtn.textContent = 'Войти';
+                    submitBtn.disabled = false;
                 }
             });
         });
+        
+        // Функция для уведомлений
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notifications-container');
+            if (!container) return;
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            container.appendChild(notification);
+            
+            // Удаляем через 5 секунд
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
     </script>
 </body>
 </html>

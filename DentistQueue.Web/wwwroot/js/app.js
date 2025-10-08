@@ -43,77 +43,33 @@ class DentistQueueApp {
 
     async loadMockData() {
         try {
+            console.log('Loading doctors from API...');
             // Загружаем данные с API
             const response = await fetch('/api/doctors');
+            console.log('API response status:', response.status);
             if (response.ok) {
-                this.doctors = await response.json();
+                const data = await response.json();
+                // API возвращает данные в формате {value: [...]}
+                this.doctors = data.value || data || [];
+                console.log('Doctors loaded from API:', this.doctors.length, 'doctors');
             } else {
-                // Fallback на локальные данные
-                this.loadLocalMockData();
+                console.error('API failed, no doctors available');
+                this.doctors = [];
+                this.showAlert('Не удалось загрузить список врачей. Попробуйте обновить страницу.', 'error');
             }
         } catch (error) {
-            console.warn('Не удалось загрузить данные с API, используем локальные данные:', error);
-            this.loadLocalMockData();
+            console.error('Не удалось загрузить данные с API:', error);
+            this.doctors = [];
+            this.showAlert('Ошибка загрузки данных. Проверьте подключение к интернету.', 'error');
         }
     }
 
-    loadLocalMockData() {
-        // Локальные mock данные врачей (fallback)
-        this.doctors = [
-            {
-                id: "1",
-                fullName: "Иванов Иван Иванович",
-                specializations: ["Стоматолог-терапевт"],
-                rating: 4.8,
-                reviewCount: 127,
-                experienceYears: 8,
-                photoUrl: "https://via.placeholder.com/300x300/1976d2/ffffff?text=ИИИ",
-                clinic: { name: "Стоматология 'Улыбка'", city: "Москва" },
-                services: this.getDoctorServices("1")
-            },
-            {
-                id: "2",
-                fullName: "Петрова Анна Сергеевна",
-                specializations: ["Стоматолог-хирург"],
-                rating: 4.9,
-                reviewCount: 89,
-                experienceYears: 12,
-                photoUrl: "https://via.placeholder.com/300x300/42a5f5/ffffff?text=ПАС",
-                clinic: { name: "Медицинский центр 'Здоровье'", city: "Москва" },
-                services: this.getDoctorServices("2")
-            },
-            {
-                id: "3",
-                fullName: "Сидоров Михаил Петрович",
-                specializations: ["Ортодонт"],
-                rating: 4.7,
-                reviewCount: 156,
-                experienceYears: 15,
-                photoUrl: "https://via.placeholder.com/300x300/66bb6a/ffffff?text=СМП",
-                clinic: { name: "Клиника 'Белые зубы'", city: "Санкт-Петербург" },
-                services: this.getDoctorServices("3")
-            },
-            {
-                id: "4",
-                fullName: "Козлова Елена Владимировна",
-                specializations: ["Детский стоматолог"],
-                rating: 4.9,
-                reviewCount: 203,
-                experienceYears: 10,
-                photoUrl: "https://via.placeholder.com/300x300/ff7043/ffffff?text=КЕВ",
-                clinic: { name: "Детская стоматология 'Радуга'", city: "Москва" },
-                services: this.getDoctorServices("4")
-            }
-        ];
-    }
 
     getDoctorServices(doctorId) {
-        // Получаем услуги врача из localStorage
-        const doctorServices = JSON.parse(localStorage.getItem('doctorServices') || '[]');
-        
-        // Если это врач с ID "2" (демо-врач), возвращаем его услуги
-        if (doctorId === "2") {
-            return doctorServices.filter(service => service.active).map(service => ({
+        // Получаем услуги врача из API данных
+        const doctor = this.doctors.find(d => d.id === doctorId);
+        if (doctor && doctor.services) {
+            return doctor.services.map(service => ({
                 id: service.id,
                 title: service.title,
                 price: service.price,
@@ -122,19 +78,26 @@ class DentistQueueApp {
             }));
         }
         
-        // Для остальных врачей возвращаем дефолтные услуги
-        const defaultServices = {
-            "1": [{ title: "Консультация", price: 1500, duration: 30 }, { title: "Лечение кариеса", price: 2500, duration: 60 }],
-            "3": [{ title: "Брекеты", price: 80000, duration: 120 }, { title: "Коронка", price: 15000, duration: 90 }],
-            "4": [{ title: "Детская консультация", price: 1000, duration: 30 }, { title: "Лечение молочных зубов", price: 2000, duration: 45 }]
-        };
-        
-        return defaultServices[doctorId] || [];
+        return [];
     }
 
     renderDoctors() {
+        console.log('Rendering doctors:', this.doctors.length);
         const doctorsGrid = document.getElementById('doctors-grid');
-        if (!doctorsGrid) return;
+        if (!doctorsGrid) {
+            console.error('doctors-grid element not found');
+            return;
+        }
+
+        if (this.doctors.length === 0) {
+            doctorsGrid.innerHTML = `
+                <div class="text-center" style="grid-column: 1 / -1; padding: 2rem;">
+                    <h3>Врачи не найдены</h3>
+                    <p>В данный момент нет доступных врачей. Попробуйте обновить страницу.</p>
+                </div>
+            `;
+            return;
+        }
 
         doctorsGrid.innerHTML = this.doctors.map(doctor => `
             <div class="doctor-card">
@@ -151,12 +114,13 @@ class DentistQueueApp {
                 </div>
                 <p class="doctor-clinic">${doctor.clinic?.name || 'Клиника'}, ${doctor.clinic?.city || 'Город'}</p>
                 <p class="doctor-experience">Опыт работы: ${doctor.experienceYears} лет</p>
-                <div class="doctor-price">от ${doctor.services?.[0]?.price || 0} ₽</div>
+                <div class="doctor-price">от ${doctor.services?.[0]?.price || 0} сом</div>
                 <button class="btn btn-primary" onclick="app.showDoctorDetails('${doctor.id}')">
                     Записаться на прием
                 </button>
             </div>
         `).join('');
+        console.log('Doctors rendered successfully');
     }
 
     renderStars(rating) {
@@ -227,7 +191,7 @@ class DentistQueueApp {
                 </div>
                 <p class="doctor-clinic">${doctor.clinic?.name || 'Клиника'}, ${doctor.clinic?.city || 'Город'}</p>
                 <p class="doctor-experience">Опыт работы: ${doctor.experienceYears} лет</p>
-                <div class="doctor-price">от ${doctor.services?.[0]?.price || 0} ₽</div>
+                <div class="doctor-price">от ${doctor.services?.[0]?.price || 0} сом</div>
                 <button class="btn btn-primary" onclick="app.showDoctorDetails('${doctor.id}')">
                     Записаться на прием
                 </button>
@@ -236,11 +200,17 @@ class DentistQueueApp {
     }
 
     showDoctorDetails(doctorId) {
+        console.log('showDoctorDetails called with doctorId:', doctorId);
         const doctor = this.doctors.find(d => d.id === doctorId);
-        if (!doctor) return;
+        if (!doctor) {
+            console.error('Doctor not found with id:', doctorId);
+            return;
+        }
 
+        console.log('Current user:', this.currentUser);
         // Проверяем авторизацию
         if (!this.currentUser) {
+            console.log('No current user, showing login modal');
             this.showLoginModal();
             return;
         }
@@ -271,7 +241,7 @@ class DentistQueueApp {
                                 <option value="">Выберите услугу</option>
                                 ${doctor.services?.map(service => 
                                     `<option value="${service.id}" data-price="${service.price}" data-duration="${service.duration}">
-                                        ${service.title} - ${service.price} ₽ (${service.duration} мин)
+                                        ${service.title} - ${service.price} сом (${service.duration} мин)
                                     </option>`
                                 ).join('') || '<option value="">Нет доступных услуг</option>'}
                             </select>
@@ -342,7 +312,7 @@ class DentistQueueApp {
                 document.getElementById('summary-service').textContent = selectedService.textContent.split(' - ')[0];
                 document.getElementById('summary-date').textContent = new Date(selectedDate).toLocaleDateString('ru-RU');
                 document.getElementById('summary-time').textContent = selectedTime;
-                document.getElementById('summary-price').textContent = selectedService.dataset.price + ' ₽';
+                document.getElementById('summary-price').textContent = selectedService.dataset.price + ' сом';
                 summaryDiv.style.display = 'block';
             } else {
                 summaryDiv.style.display = 'none';
@@ -354,7 +324,7 @@ class DentistQueueApp {
         timeSelect.addEventListener('change', updateSummary);
     }
 
-    createAppointment(doctor) {
+    async createAppointment(doctor) {
         const serviceSelect = document.getElementById('appointment-service');
         const selectedService = serviceSelect.options[serviceSelect.selectedIndex];
         const date = document.getElementById('appointment-date').value;
@@ -366,36 +336,64 @@ class DentistQueueApp {
             return;
         }
 
-        // Показываем загрузку
-        this.showLoading();
+        if (!date || !time) {
+            this.showAlert('Пожалуйста, выберите дату и время', 'error');
+            return;
+        }
 
-        // Создаем запись
-        const appointment = {
-            id: Date.now(),
-            doctorId: doctor.id,
-            doctorName: doctor.fullName,
-            serviceId: selectedService.value,
-            serviceTitle: selectedService.textContent.split(' - ')[0],
-            servicePrice: parseInt(selectedService.dataset.price),
-            serviceDuration: parseInt(selectedService.dataset.duration),
-            date: date,
-            time: time,
-            notes: notes,
-            status: 'pending',
-            createdAt: new Date().toISOString()
-        };
+        try {
+            // Показываем загрузку
+            this.showLoading();
 
-        // Сохраняем запись в localStorage
-        const appointments = JSON.parse(localStorage.getItem('patientAppointments') || '[]');
-        appointments.push(appointment);
-        localStorage.setItem('patientAppointments', JSON.stringify(appointments));
+            // Создаем запись через API
+            const appointmentData = {
+                doctorId: doctor.id,
+                serviceId: selectedService.value,
+                appointmentDate: new Date(date + 'T' + time + ':00'),
+                appointmentTime: time,
+                notes: notes || null
+            };
 
-        // Имитируем запрос к серверу
-        setTimeout(() => {
+            const result = await window.authAPI.request('/appointments', {
+                method: 'POST',
+                body: JSON.stringify(appointmentData)
+            });
+
             this.hideLoading();
             this.closeModal();
             this.showAlert('Запись успешно создана! Врач свяжется с вами для подтверждения.', 'success');
-        }, 2000);
+
+            // Обновляем локальные записи для совместимости
+            const appointment = {
+                id: result.id,
+                doctorId: doctor.id,
+                doctorName: doctor.fullName,
+                serviceId: selectedService.value,
+                serviceTitle: selectedService.textContent.split(' - ')[0],
+                servicePrice: parseInt(selectedService.dataset.price),
+                serviceDuration: parseInt(selectedService.dataset.duration),
+                date: date,
+                time: time,
+                notes: notes,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+
+            const appointments = JSON.parse(localStorage.getItem('patientAppointments') || '[]');
+            appointments.push(appointment);
+            localStorage.setItem('patientAppointments', JSON.stringify(appointments));
+
+        } catch (error) {
+            console.error('Appointment creation error:', error);
+            this.hideLoading();
+            
+            if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                this.showAlert('Необходимо войти в систему для записи к врачу', 'error');
+                this.showLoginModal();
+            } else {
+                this.showAlert('Ошибка при создании записи. Попробуйте еще раз.', 'error');
+            }
+        }
     }
 
     showLoginModal() {
@@ -435,39 +433,70 @@ class DentistQueueApp {
         });
     }
 
-    login() {
+    async login() {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-        // Простая проверка для демо
-        if (email === 'patient@example.com' && password === '123456') {
-            this.currentUser = {
-                id: 1,
-                name: 'Иван Иванов',
-                email: email,
-                role: 'patient'
-            };
-            
-            this.closeModal();
-            this.showAlert('Добро пожаловать!', 'success');
-            this.updateAuthUI();
-        } else {
-            this.showAlert('Неверный email или пароль', 'error');
+        if (!email || !password) {
+            this.showAlert('Пожалуйста, заполните все поля', 'error');
+            return;
+        }
+
+        try {
+            this.showLoading();
+            const result = await window.authAPI.login(email, password);
+
+            if (result.success) {
+                this.currentUser = result.user;
+                this.closeModal();
+                this.showAlert('Добро пожаловать!', 'success');
+                this.updateAuthUI();
+            } else {
+                this.showAlert(result.errors?.[0] || 'Ошибка входа', 'error');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            this.showAlert('Ошибка при входе в систему', 'error');
+        } finally {
+            this.hideLoading();
         }
     }
 
     logout() {
+        window.authAPI.logout();
         this.currentUser = null;
         this.updateAuthUI();
         this.showAlert('Вы вышли из системы', 'info');
     }
 
-    checkAuth() {
-        // Проверяем сохраненного пользователя в localStorage
-        const savedUser = localStorage.getItem('currentUser');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-            this.updateAuthUI();
+    async checkAuth() {
+        try {
+            console.log('Checking auth...');
+            // Проверяем токен
+            const isValid = await window.authAPI.validateToken();
+            console.log('Token validation result:', isValid);
+            if (isValid) {
+                const user = await window.authAPI.getCurrentUser();
+                console.log('Current user from API:', user);
+                this.currentUser = user;
+                this.updateAuthUI();
+            } else {
+                // Проверяем сохраненного пользователя в localStorage (fallback)
+                const savedUser = localStorage.getItem('currentUser');
+                console.log('Saved user from localStorage:', savedUser);
+                if (savedUser) {
+                    this.currentUser = JSON.parse(savedUser);
+                    this.updateAuthUI();
+                }
+            }
+        } catch (error) {
+            console.warn('Auth check failed:', error);
+            // Fallback на localStorage
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                this.currentUser = JSON.parse(savedUser);
+                this.updateAuthUI();
+            }
         }
     }
 
@@ -476,8 +505,9 @@ class DentistQueueApp {
         if (!navAuth) return;
 
         if (this.currentUser) {
+            const userName = this.currentUser.fullName || this.currentUser.name || 'Пользователь';
             navAuth.innerHTML = `
-                <span>Привет, ${this.currentUser.name}!</span>
+                <span>Привет, ${userName}!</span>
                 <button class="btn btn-outline" onclick="app.logout()">Выйти</button>
             `;
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));

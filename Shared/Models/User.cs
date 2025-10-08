@@ -21,6 +21,27 @@ public class User
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    // Навигационные свойства
+    public UserPassword? Password { get; set; }
+    public List<Appointment> Appointments { get; set; } = new();
+}
+
+public class UserPassword
+{
+    public Guid Id { get; set; }
+    
+    public Guid UserId { get; set; }
+    
+    [Required]
+    public string PasswordHash { get; set; } = string.Empty;
+    
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    
+    // Навигационное свойство
+    public User User { get; set; } = null!;
 }
 
 public enum UserRole

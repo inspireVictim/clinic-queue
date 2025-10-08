@@ -20,7 +20,7 @@ public class Payment
     [Range(0, double.MaxValue)]
     public decimal Amount { get; set; }
 
-    public string Currency { get; set; } = "RUB";
+    public string Currency { get; set; } = "SOM";
 
     public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
 

@@ -8,7 +8,7 @@ public class ServiceDto
     public Guid DoctorId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public int DurationMinutes { get; set; }
+    public int Duration { get; set; }
     public decimal Price { get; set; }
     public bool IsActive { get; set; }
 }
@@ -21,7 +21,7 @@ public class CreateServiceDto
     public string Description { get; set; } = string.Empty;
 
     [Range(15, 240)]
-    public int DurationMinutes { get; set; } = 30;
+    public int Duration { get; set; } = 30;
 
     [Range(0, double.MaxValue)]
     public decimal Price { get; set; }

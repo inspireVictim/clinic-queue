@@ -7,9 +7,7 @@ public class Doctor
     public Guid Id { get; set; }
 
     [Required]
-    public Guid UserId { get; set; }
-
-    public User? User { get; set; }
+    public string FullName { get; set; } = string.Empty;
 
     public Guid? ClinicId { get; set; }
 
