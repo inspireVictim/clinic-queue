@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DentistQueue.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c10b0a0719b32bbf4cddeb5d21938588d2e0a2d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db906ee5939a2dae6ef1d0d7052d28c09998b343")]
 [assembly: System.Reflection.AssemblyProductAttribute("DentistQueue.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DentistQueue.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

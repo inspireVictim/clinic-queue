@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MVP_dentist_queue\\Client\\Layout\\MainLayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\Layout\\MainLayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MVP_dentist_queue\\Client\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MVP_dentist_queue\\Client\\Layout\\MainLayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\Layout\\MainLayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MVP_dentist_queue\\Client\\Pages\\DoctorDetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -53,13 +53,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "app.css",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\wwwroot\\css\\app.css",
               "RelativeDocumentMoniker": "Client\\wwwroot\\css\\app.css",
               "ToolTip": "E:\\MVP_dentist_queue\\Client\\wwwroot\\css\\app.css",
               "RelativeToolTip": "Client\\wwwroot\\css\\app.css",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-10-04T05:58:53.966Z"
             },
@@ -101,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "Client\\Layout\\MainLayout.razor",

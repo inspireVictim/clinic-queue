@@ -7,6 +7,26 @@
       "RelativeMoniker": "D:0:0:{D59D374E-182D-47C5-914B-58D31B1890E7}|DentistQueue.Web\\DentistQueue.Web.csproj|solutionrelative:dentistqueue.web\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|e:\\mvp_dentist_queue\\shared\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|solutionrelative:shared\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|e:\\mvp_dentist_queue\\shared\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|solutionrelative:shared\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|e:\\mvp_dentist_queue\\shared\\models\\clinic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|solutionrelative:shared\\models\\clinic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|e:\\mvp_dentist_queue\\shared\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C00C95-FB91-4E71-B10B-3DD0ADF4F69B}|Shared\\DentistQueue.Shared.csproj|solutionrelative:shared\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D59D374E-182D-47C5-914B-58D31B1890E7}|DentistQueue.Web\\DentistQueue.Web.csproj|e:\\mvp_dentist_queue\\dentistqueue.web\\wwwroot\\pages\\search.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D59D374E-182D-47C5-914B-58D31B1890E7}|DentistQueue.Web\\DentistQueue.Web.csproj|solutionrelative:dentistqueue.web\\wwwroot\\pages\\search.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MVP_dentist_queue\\Client\\Services\\MockDoctorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\Services\\MockDoctorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -66,8 +86,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Shared\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\User.cs",
+              "ToolTip": "E:\\MVP_dentist_queue\\Shared\\Models\\User.cs",
+              "RelativeToolTip": "Shared\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-08T15:42:43.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Shared\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\Payment.cs",
+              "ToolTip": "E:\\MVP_dentist_queue\\Shared\\Models\\Payment.cs",
+              "RelativeToolTip": "Shared\\Models\\Payment.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-08T15:42:18.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Clinic.cs",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Shared\\Models\\Clinic.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\Clinic.cs",
+              "ToolTip": "E:\\MVP_dentist_queue\\Shared\\Models\\Clinic.cs",
+              "RelativeToolTip": "Shared\\Models\\Clinic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-08T15:42:10.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\Shared\\Models\\Doctor.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\Doctor.cs",
+              "ToolTip": "E:\\MVP_dentist_queue\\Shared\\Models\\Doctor.cs",
+              "RelativeToolTip": "Shared\\Models\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-08T15:41:59.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "search.html",
+              "DocumentMoniker": "E:\\MVP_dentist_queue\\DentistQueue.Web\\wwwroot\\pages\\search.html",
+              "RelativeDocumentMoniker": "DentistQueue.Web\\wwwroot\\pages\\search.html",
+              "ToolTip": "E:\\MVP_dentist_queue\\DentistQueue.Web\\wwwroot\\pages\\search.html",
+              "RelativeToolTip": "DentistQueue.Web\\wwwroot\\pages\\search.html",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAA8BAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-08T15:34:44.569Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -76,14 +161,14 @@
               "RelativeDocumentMoniker": "DentistQueue.Web\\wwwroot\\index.html",
               "ToolTip": "E:\\MVP_dentist_queue\\DentistQueue.Web\\wwwroot\\index.html",
               "RelativeToolTip": "DentistQueue.Web\\wwwroot\\index.html",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-10-07T15:19:05.704Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "MockDoctorService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\MockDoctorService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\MockDoctorService.cs",
@@ -94,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\Interfaces\\IAuthService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\Interfaces\\IAuthService.cs",
@@ -106,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "IDoctorService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\Interfaces\\IDoctorService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\Interfaces\\IDoctorService.cs",
@@ -118,7 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "INotificationService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\Interfaces\\INotificationService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\Interfaces\\INotificationService.cs",
@@ -130,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "IStorageService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\Interfaces\\IStorageService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\Interfaces\\IStorageService.cs",
@@ -142,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "IAppointmentService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\Interfaces\\IAppointmentService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\Interfaces\\IAppointmentService.cs",
@@ -154,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "LocalStorageService.cs",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Services\\LocalStorageService.cs",
               "RelativeDocumentMoniker": "Client\\Services\\LocalStorageService.cs",
@@ -166,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Home.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\Home.razor",
@@ -178,7 +263,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "Counter.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\Counter.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\Counter.razor",
@@ -190,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Contact.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\Contact.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\Contact.razor",
@@ -202,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Appointments.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\Appointments.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\Appointments.razor",
@@ -214,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "About.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\About.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\About.razor",
@@ -226,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "DoctorDetails.razor",
               "DocumentMoniker": "E:\\MVP_dentist_queue\\Client\\Pages\\DoctorDetails.razor",
               "RelativeDocumentMoniker": "Client\\Pages\\DoctorDetails.razor",
